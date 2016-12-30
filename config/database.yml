@@ -24,6 +24,12 @@ default: &default
 development:
   <<: *default
   database: DashBattle_development
+  adapter: postgresql
+  username: postgres
+  port: 5432
+  pool: 10
+  password: esmagnifico
+  host: localhost
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
