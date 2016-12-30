@@ -1,8 +1,11 @@
 .row
   .col-sm-8.col-sm-offset-2
     %h1 My Dashboards
-    -@dashboards.each do |dashboard|
-      Dashboard
+    .dashboard-links
+      -@dashboards.each do |dashboard|
+        =link_to dashboard_path(dashboard) do
+          .dashboard-link
+            =dashboard.name
     =link_to new_dashboard_path do
       .btn.btn-default
         Create Dashboard
