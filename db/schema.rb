@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20161230144248) do
 
   create_table "dashboards", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

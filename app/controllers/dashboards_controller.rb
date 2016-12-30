@@ -4,4 +4,8 @@ class DashboardsController < ApplicationController
   def index
     @dashboards = current_user.dashboards
   end
+
+  def new
+
+  end
 end

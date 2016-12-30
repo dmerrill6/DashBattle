@@ -7,7 +7,7 @@
     </div>
     <div class="navbar-right">
       <% if user_signed_in? %>
-      <%= link_to(dashboards_path, :method => :delete) do %>
+      <%= link_to(dashboards_path) do %>
         <button type="button" class="btn btn-default navbar-btn">
           My Dashboards
         </button>
@@ -16,7 +16,7 @@
           <button type="button" class="btn btn-default navbar-btn">
             Logout
           </button>
-        <% end %>        
+        <% end %>
       <% else %>
         <%= link_to(new_user_session_path)  do %>
           <button type="button" class="btn btn-default navbar-btn">
