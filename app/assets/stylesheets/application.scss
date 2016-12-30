@@ -13,10 +13,36 @@
  *= require_self
  */
 
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
-@import "bootswatch-sass/paper/bootswatch";
-@import "angular-gridster/dist/angular-gridster.min.css";
 
+ // Vendors (contains 3rd-party styles)
+
+@import "custom-bootstrap";
+@import "bootswatch/variables";
+@import "bootswatch/bootswatch";
 @import "bootstrap_and_overrides";
+
+
+// Settings (global mixins, functions, helper selectors, etc.)
+@import "settings/colors";
+
+// Base (global and generic styles, such as resets, typography, etc.)
+@import "global";
+@import "typo";
+
+// Layouts
 @import "dashboards";
+
+
+// Components (contains each self-contained component)
+@import "components/navbar";
+
+
+// Pages (contains page-specific styling, if necessary)
 @import "pages";
+
+
+// helpers
+@import "helpers/utilities";
+
+
+// Shame

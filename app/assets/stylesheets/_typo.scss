@@ -1,0 +1,35 @@
+
+h1,
+h2,
+h3 {
+  font-family: opensans-bold;
+  font-weight: 700;
+}
+
+.title-home {
+  font-size: 6em;
+  font-weight: 700;
+  color: $c-primary;
+}
+
+
+// Custom fonts
+// =============================================================================
+
+@font-face {
+  font-family: 'opensans-regular';
+  src:font-url('OpenSans-Regular.eot');
+  src:font-url('OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
+      font-url('OpenSans-Regular.ttf') format('truetype'),
+      font-url('OpenSans-Regular.woff') format('woff'),
+      font-url('OpenSans-Regular.svg#icofonts') format('svg');
+}
+
+@font-face {
+  font-family: 'opensans-bold';
+  src:font-url('OpenSans-Bold.eot');
+  src:font-url('OpenSans-Bold.eot?#iefix') format('embedded-opentype'),
+      font-url('OpenSans-Bold.ttf') format('truetype'),
+      font-url('OpenSans-Bold.woff') format('woff'),
+      font-url('OpenSans-Bold.svg#icofonts') format('svg');
+}
