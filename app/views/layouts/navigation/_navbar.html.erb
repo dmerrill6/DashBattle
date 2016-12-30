@@ -1,11 +1,11 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+<nav class="navbar navbar--dashbattle">
+  <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="<%=root_path%>">
         DashBattle
       </a>
     </div>
-    <div class="navbar-right">
+    <div class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
       <%= link_to(dashboards_path) do %>
         <button type="button" class="btn btn-default navbar-btn">
@@ -23,7 +23,7 @@
             Login
           </button>
         <% end %>
-          <%= link_to(new_user_registration_path)  do %>
+        <%= link_to(new_user_registration_path)  do %>
           <button type="button" class="btn btn-default navbar-btn">
             Register
           </button>
