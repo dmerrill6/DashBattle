@@ -8,4 +8,11 @@ class DashboardsController < ApplicationController
   def new
 
   end
+
+  protected
+  def dashboard_params
+		params.require(:dashboard).permit(
+      :name
+		)
+	end
 end

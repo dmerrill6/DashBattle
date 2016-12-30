@@ -3,6 +3,8 @@
     %h1 Creating Dashboard
     =form_for Dashboard.new do |f|
       =f.label :name
-      =f.text_field :name
+      =f.text_field :name, class: "form-control"
+      %br
+      	
       .btn.btn-success{type: 'submit'}
         Create
