@@ -1,6 +1,6 @@
 .dashboard
   .text-center{'ng-controller'=>'DashboardsController'}
     %h1=@dashboard.name
-    .gridster-container{'gridster'=>'', 'ng-init'=>"fetchDashboardComponents('#{root_path}')"}
+    .gridster-container{'gridster'=>'gridsterOpts', 'ng-init'=>"fetchDashboardComponents('#{root_path}')"}
       %ul
         %li{'gridster-item'=>'dashboardComponent', 'ng-repeat'=>"dashboardComponent in dashboardComponents"}
