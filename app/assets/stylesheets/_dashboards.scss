@@ -23,5 +23,13 @@
 
 
   transition: background-color 0.3s ease;
+}
 
+.dashboard{
+  background-color: rgb(83, 172, 140);
+  padding: 5em;
+  color: white;
+  .gridster-item{
+    background-color: white;
+  }
 }
