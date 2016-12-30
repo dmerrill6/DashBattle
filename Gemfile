@@ -67,3 +67,6 @@ gem 'devise'
 # Permissions
 gem 'cancancan'
 gem 'rolify'
+
+# Model serializer, easily transform models to json
+gem 'active_model_serializers', '~> 0.10.0'
