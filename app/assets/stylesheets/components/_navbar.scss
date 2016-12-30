@@ -5,6 +5,10 @@
   border-radius: 0;
   box-shadow: none;
 
+  .navbar-brand {
+    font-weight: 700;
+  }
+
 
   a {
     color: $c-seconday;

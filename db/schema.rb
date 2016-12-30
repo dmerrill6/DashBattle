@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230144248) do
+ActiveRecord::Schema.define(version: 20161230162525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "component_dashboards", force: :cascade do |t|
+    t.integer  "component_id"
+    t.integer  "dashboard_id"
+    t.integer  "col"
+    t.integer  "row"
+    t.string   "endpoint"
+    t.string   "secret_key"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "components", force: :cascade do |t|
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "dashboards", force: :cascade do |t|
     t.integer  "user_id"

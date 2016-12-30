@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  component_id: 1
+  dashboard_id: 1
+  col: 1
+  row: 1
+  endpoint: MyString
+  secret_key: MyString
+
+two:
+  component_id: 1
+  dashboard_id: 1
+  col: 1
+  row: 1
+  endpoint: MyString
+  secret_key: MyString
