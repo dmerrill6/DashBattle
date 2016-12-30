@@ -1,0 +1,2 @@
+class ComponentDashboard < ApplicationRecord
+end
