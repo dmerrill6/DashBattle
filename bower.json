@@ -10,7 +10,8 @@
     "dependencies": {
       "angular-ui-router": "0.3.1",
       "angular-animate": "1.5.8",
-      "bootswatch-sass": "3.2.0"
+      "bootswatch-sass": "3.2.0",
+      "angular-gridster": "0.13.14"
     }
   }
 }
