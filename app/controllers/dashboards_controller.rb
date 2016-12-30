@@ -6,6 +6,10 @@ class DashboardsController < ApplicationController
 
   def index
     @dashboards = current_user.dashboards
+    respond_to do |format|
+      format.html{}
+      format.json{render json: @dashboards, status: :ok }
+    end
   end
 
   def new
