@@ -2,7 +2,8 @@
 
 
 .dashboard-container.clearfix{'ng-controller'=>'DashboardsController'}
-  %h1=@dashboard.name
+  %h1.text-center
+    =@dashboard.name
   .gridster-container{'gridster'=>'gridsterOpts', 'ng-init'=>"fetchDashboardComponents('#{root_path}')"}
     %ul
       %li{'gridster-item'=>'dashboardComponent', 'ng-repeat'=>"dashboardComponent in dashboardComponents"}
