@@ -20,6 +20,7 @@
 @import "bootswatch/variables";
 @import "bootswatch/bootswatch";
 @import "bootstrap_and_overrides";
+@import "angular-gridster/dist/angular-gridster.css";
 
 
 // Settings (global mixins, functions, helper selectors, etc.)
@@ -35,6 +36,7 @@
 
 // Components (contains each self-contained component)
 @import "components/navbar";
+@import "components/forms";
 
 
 // Pages (contains page-specific styling, if necessary)

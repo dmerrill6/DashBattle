@@ -1,38 +1,53 @@
-// Place all the styles related to the dashboards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+// -------------------------------------------------------------
+// Lista con dashboard usuario
+// -------------------------------------------------------------
 .dashboard-links{
-  margin: 3em 0em;
+  margin: 1.5em 0em;
+
   a{
-    color: #7c7c7c;
+    font-size: 1.2em;
+    color: white;
+
+    transition: color 0.3s ease;
+
     &:hover, &:focus{
       color: white;
       text-decoration: none;
     }
-    transition: color 0.3s ease;
   }
 }
+
 .dashboard-link{
-  padding: 2em 10em;
+  padding: 1em 2em;
+
   &:hover, &:focus{
-    background-color: #909090;
+    background-color: $c-hover-bg;
   }
   border-bottom: solid 1px #f0f0f0;
   border-top: solid 1px #f0f0f0;
-
-
   transition: background-color 0.3s ease;
 }
 
-.dashboard{
-  background-color: rgb(83, 172, 140);
-  padding: 5em;
+
+
+// -------------------------------------------------------------
+// Dashboard
+// -------------------------------------------------------------
+
+.dashboard-container {
+  padding: 3rem 2rem 1rem;
   color: white;
+
   .gridster-item{
     background-color: white;
     color: black;
   }
+}
+
+.dash-color-default {
+  background-color: rgb(83, 172, 140);
 }
 
 
