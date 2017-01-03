@@ -58,7 +58,7 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     margins: [10, 10], // the pixel distance between each widget
     outerMargin: true, // whether margins apply to outer edges of the grid
     sparse: false, // "true" can increase performance of dragging and resizing for big grid (e.g. 20x50)
-    isMobile: false, // stacks the grid items if true
+    isMobile: true, // stacks the grid items if true
     mobileBreakPoint: 600, // if the screen is not wider that this, remove the grid layout and stack the items
     mobileModeEnabled: true, // whether or not to toggle mobile mode when screen width is less than mobileBreakPoint
     minColumns: 1, // the minimum columns the grid must have
@@ -67,14 +67,14 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     defaultSizeX: 2, // the default width of a gridster item, if not specifed
     defaultSizeY: 1, // the default height of a gridster item, if not specified
     minSizeX: 1, // minimum column width of an item
-    maxSizeX: null, // maximum column width of an item
+    maxSizeX: 3, // maximum column width of an item
     minSizeY: 1, // minumum row height of an item
-    maxSizeY: null, // maximum row height of an item
+    maxSizeY: 2, // maximum row height of an item
     resizable: {
-       enabled: false
+       enabled: true
     },
     draggable: {
-       enabled: true // whether dragging items is supported
+      enabled: true // whether dragging items is supported
     }
 };
 }]);

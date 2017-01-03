@@ -1,17 +1,18 @@
-.dashboard-container.clearfix
-  .text-center{'ng-controller'=>'DashboardsController'}
-    %h1=@dashboard.name
-    .gridster-container{'gridster'=>'gridsterOpts', 'ng-init'=>"fetchDashboardComponents('#{root_path}')"}
-      %ul
-        %li{'gridster-item'=>'dashboardComponent', 'ng-repeat'=>"dashboardComponent in dashboardComponents"}
-          .amount{'ng-if'=>'dashboardComponent.component.data_type == "amount"'}
-            .title
-              %h3
-                {{dashboardComponent.title}}
-            .subtitle
-              %h4
-                {{dashboardComponent.subtitle}}
+.userBar
 
-            {{dashboardComponent.amount}}
-          .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
-            %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}
+
+.dashboard-container.clearfix{'ng-controller'=>'DashboardsController'}
+  %h1=@dashboard.name
+  .gridster-container{'gridster'=>'gridsterOpts', 'ng-init'=>"fetchDashboardComponents('#{root_path}')"}
+    %ul
+      %li{'gridster-item'=>'dashboardComponent', 'ng-repeat'=>"dashboardComponent in dashboardComponents"}
+        .gdstr-header.amount{'ng-if'=>'dashboardComponent.component.data_type == "amount"'}
+          %h3.gdstr-title
+            {{dashboardComponent.title}}
+
+          %p.subtitle
+            {{dashboardComponent.subtitle}}
+
+          {{dashboardComponent.amount}}
+        .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
+          %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}

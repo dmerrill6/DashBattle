@@ -39,11 +39,6 @@
 .dashboard-container {
   padding: 3rem 2rem 1rem;
   color: white;
-
-  .gridster-item{
-    background-color: white;
-    color: black;
-  }
 }
 
 .dash-color-default {
@@ -51,6 +46,36 @@
 }
 
 
+// -------------------------------------------------------------
+// Gridster
+// -------------------------------------------------------------
+
+.gridster-item {
+  padding: 1em;
+
+  color: black;
+  background-color: white;
+
+  &.is-moving {
+    background-color: aquamarine;
+  }
+}
+
+.gdstr-title {
+  color: $c-primary;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px
+}
+
+.subtitle h4 {
+  font-size: 16px;
+}
+
+
+// -------------------------------------------------------------
+// landing pahe
+// -------------------------------------------------------------
 
 .welcome-block {
   background-color: #fff;
