@@ -1,49 +1,53 @@
 controllers.controller('DashboardsController', ['$scope', '$http', function($scope, $http){
   $scope.dashboardComponents = [];
   $scope.fetchDashboardComponents = function(dashboardComponentsPath){
-    // $http({
-    //   url: dashboardComponentsPath,
-    //   method: "GET"
-    // }).then(function successCallback(data){
-    //   for(var i = 0; i < data.length; i++){
-    //     addDashboardComponent(data[i]);
-    //   }
-    // }, function errorCallback(data){
-    //   alert("There was an error while loading :(");
-    // });
-
-    for(var i = 0; i < 10; i++){
-      addDashboardComponent({
-        col: i%6,
-        row: 0,
-        endpoint: "test",
-        sizeX: 1,
-        sizeY: 1,
-        amount: Math.round(Math.random() * 1000000, 0),
-        title: "Papinotas Enviados",
-        subtitle: "Por colegio " + i,
-        component: {
-          data_type: 'amount'
-        }
-      });
-    }
-    addDashboardComponent({
-      col:0,
-      row:2,
-      endpoint: "test",
-      sizeX: 2,
-      sizeY: 1,
-      data: {
-        labels: ['Colegio Papinotas', 'Hunneus', 'Rial Test School', 'Instituto Nacional', 'República de Chile', 'Liceo X'],
-        values: [100, 90, 85, 70, 50, 28]
-      },
-      component: {
-        data_type: 'bar-chart'
+    $http({
+      url: dashboardComponentsPath,
+      method: "GET"
+    }).then(function successCallback(data){
+      for(var i = 0; i < data.data.length; i++){
+        addDashboardComponent(data.data[i]);
       }
+    }, function errorCallback(data){
+      alert("There was an error while loading :(");
     });
+    //
+    // for(var i = 0; i < 10; i++){
+    //   addDashboardComponent({
+    //     col: i%6,
+    //     row: 0,
+    //     endpoint: "test",
+    //     sizeX: 1,
+    //     sizeY: 1,
+    //     amount: Math.round(Math.random() * 1000000, 0),
+    //     title: "Papinotas Enviados",
+    //     subtitle: "Por colegio " + i,
+    //     component: {
+    //       data_type: 'amount'
+    //     }
+    //   });
+    // }
+    // addDashboardComponent({
+    //   col:0,
+    //   row:2,
+    //   endpoint: "test",
+    //   sizeX: 2,
+    //   sizeY: 1,
+    //   data: {
+    //     labels: ['Colegio Papinotas', 'Hunneus', 'Rial Test School', 'Instituto Nacional', 'República de Chile', 'Liceo X'],
+    //     values: [100, 90, 85, 70, 50, 28]
+    //   },
+    //   component: {
+    //     data_type: 'bar-chart'
+    //   }
+    // });
   }
 
   var addDashboardComponent = function(dashboardComponent){
+    if(dashboardComponent.component.width != null)
+      dashboardComponent.sizeX = dashboardComponent.component.width;
+    if(dashboardComponent.component.height != null)
+      dashboardComponent.sizeY = dashboardComponent.component.height;
     $scope.dashboardComponents.push(dashboardComponent);
   }
 
