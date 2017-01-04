@@ -17,6 +17,29 @@
 }
 
 
+.navbar-logo {
+  display: inline-block;
+  width: 70px;
+}
+
+.logo-path1 {
+  animation: drawlogo 3.5s forwards;
+}
+
+.logo-path2 {
+  animation: drawlogo 2.5s forwards 1.5s;
+}
+.logo-path3 {
+  animation: drawlogo 2s forwards 2.2s;
+}
+
+@keyframes drawlogo {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+
 // Menu bars
 // --------------------------------------------------
 
