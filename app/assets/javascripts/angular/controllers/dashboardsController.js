@@ -19,7 +19,7 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
         endpoint: "test",
         sizeX: 1,
         sizeY: 1,
-        amount: Math.round(Math.random() * 1000000, 0),
+        amount: 1, //Math.round(Math.random() * 1000000, 0),
         title: "Papinotas Enviados",
         subtitle: "Por colegio " + i,
         component: {
@@ -43,8 +43,28 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     });
   }
 
+  $scope.refreshDashboardComponent = function(dashboardComponent){
+    updateDashboardComponent(dashboardComponent);
+  }
+
   var addDashboardComponent = function(dashboardComponent){
     $scope.dashboardComponents.push(dashboardComponent);
+    $scope.refreshDashboardComponent(dashboardComponent);
+  }
+
+  var updateDashboardComponent = function(dashboardComponent){
+    setInterval(function(){
+      $http({
+        method: 'GET',
+        url: 'http://papinotas-goten.us-west-2.elasticbeanstalk.com/papinotas/api/v2.0/get_quantity_sms_message?token=f7468fb5-24f0-42d8-92e6-7b7039693766'
+      }).then(function successCallback(response) {
+        dashboardComponent.amount = response.data.data[0].cantidad;
+
+      }, function errorCallback(response) {
+        console.log("error");
+      });
+        
+    }, 2000);
   }
 
   $scope.gridsterOpts = {

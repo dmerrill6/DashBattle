@@ -24,6 +24,8 @@ default: &default
 development:
   <<: *default
   database: DashBattle_development
+  username: postgres
+  password: esmagnifico
   adapter: postgresql
   port: 5432
   pool: 10

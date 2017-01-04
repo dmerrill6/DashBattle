@@ -13,5 +13,6 @@
                 {{dashboardComponent.subtitle}}
 
             {{dashboardComponent.amount}}
+            %i.fa.fa-car
           .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
             %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}
