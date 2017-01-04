@@ -8,9 +8,11 @@
         .gdstr-header.amount{'ng-if'=>'dashboardComponent.component.data_type == "amount"'}
           %h3.gdstr-title
             {{dashboardComponent.title}}
-
           %p.subtitle
             {{dashboardComponent.subtitle}}
+
+          .loading-component{'ng-if'=>'dashboardComponent.loaded == false', 'ng-cloak'=>''}
+            .fa.fa-spin.fa-circle-o-notch
           %h2.text-center
             {{dashboardComponent.amount}}
         .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}

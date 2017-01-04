@@ -48,7 +48,13 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
       method: 'GET',
       url: dashboardComponent.endpoint
     }).then(function successCallback(response) {
-      dashboardComponent.amount = parseDashboardComponentResponseDataLocation(response.data, dashboardComponent.response_data_location);
+      if(dashboardComponent.component.data_type == 'amount')
+        dashboardComponent.amount = parseDashboardComponentResponseDataLocation(response.data, dashboardComponent.response_data_location);
+      else {
+        // Complete with other types
+      }
+
+      dashboardComponent.loaded = true;
 
     }, function errorCallback(response) {
       console.log("error");
@@ -57,11 +63,11 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
   }
 
   var addDashboardComponent = function(dashboardComponent){
-    debugger;
     if(dashboardComponent.component.width != null)
       dashboardComponent.sizeX = dashboardComponent.component.width;
     if(dashboardComponent.component.height != null)
       dashboardComponent.sizeY = dashboardComponent.component.height;
+    dashboardComponent.loaded = false;
     $scope.dashboardComponents.push(dashboardComponent);
     refreshDashboardComponent(dashboardComponent);
     $setComponentTicker(dashboardComponent);

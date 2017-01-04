@@ -1,4 +1,4 @@
-
+$gridster-item-padding: 14px;
 
 // -------------------------------------------------------------
 // Lista con dashboard usuario
@@ -51,8 +51,8 @@
 // -------------------------------------------------------------
 
 .gridster-item {
-  padding: 1em;
-
+  padding: $gridster-item-padding;
+  position: relative;
   color: black;
   background-color: white;
 
@@ -72,6 +72,17 @@
   font-size: 16px;
 }
 
+$loader-font-size: 36pt;
+.loading-component{
+  text-align: center;
+  font-size: $loader-font-size;
+  color: rgb(134, 134, 134);
+  top: 50%;
+  width: 100%;
+  margin-top: -($loader-font-size / 2);
+  margin-left: -($gridster-item-padding);
+  position: absolute;
+}
 
 // -------------------------------------------------------------
 // landing pahe
