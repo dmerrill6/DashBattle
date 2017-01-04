@@ -1,18 +1,21 @@
-.dashboard
-  .text-center{'ng-controller'=>'DashboardsController'}
-    %h1=@dashboard.name
-    .gridster-container{'gridster'=>'gridsterOpts', 'ng-init'=>"fetchDashboardComponents('#{root_path}')"}
-      %ul
-        %li{'gridster-item'=>'dashboardComponent', 'ng-repeat'=>"dashboardComponent in dashboardComponents"}
-          .amount{'ng-if'=>'dashboardComponent.component.data_type == "amount"'}
-            .title
-              %h3
-                {{dashboardComponent.title}}
-            .subtitle
-              %h4
-                {{dashboardComponent.subtitle}}
+.userBar
+        
+.dashboard-container.clearfix{'ng-controller'=>'DashboardsController'}
+  %h1.text-center
+    =@dashboard.name
+  .gridster-container{'gridster'=>'gridsterOpts', 'ng-init'=>"fetchDashboardComponents('#{root_path}')"}
+    %ul
+      %li{'gridster-item'=>'dashboardComponent', 'ng-repeat'=>"dashboardComponent in dashboardComponents"}
+        .gdstr-header.amount{'ng-if'=>'dashboardComponent.component.data_type == "amount"'}
+          %h3.gdstr-title
+            {{dashboardComponent.title}}
 
-            {{dashboardComponent.amount}}
-            %i.fa.fa-car
-          .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
-            %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}
+          %p.subtitle
+            {{dashboardComponent.subtitle}}
+
+          {{dashboardComponent.amount}}
+        .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
+          %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}
+
+          = link_to "<button>New Component Dashboard</button>".html_safe, new_dashboard_component_dashboard_path(dashboard_id: @dashboard.id)
+          = link_to "<button>List Component Dashboards</button>".html_safe, dashboard_component_dashboards_path(dashboard_id: @dashboard.id)
