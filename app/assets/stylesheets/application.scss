@@ -19,10 +19,13 @@
 @import "bootswatch/variables";
 @import "bootswatch/bootswatch";
 @import "bootstrap_and_overrides";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import "angular-gridster/dist/angular-gridster.css";
 
 
 // Settings (global mixins, functions, helper selectors, etc.)
+@import "settings/variables";
 @import "settings/colors";
 
 // Base (global and generic styles, such as resets, typography, etc.)
@@ -44,6 +47,5 @@
 
 // helpers
 @import "helpers/utilities";
-
 
 // Shame

@@ -1,0 +1,20 @@
+%nav.navbar.navbar--dashbattle
+  .container-fluid
+    .navbar-header
+      %a.navbar-brand{:href => root_path}
+        DashBattle
+    .nav.navbar-nav.navbar-right
+      - if user_signed_in?
+        = link_to(dashboards_path) do
+          %button.btn.btn-default.navbar-btn{:type => "button"}
+            My Dashboards
+        = link_to(destroy_user_session_path, :method => :delete) do
+          %button.btn.btn-default.navbar-btn{:type => "button"}
+            Logout
+      - else
+        = link_to(new_user_session_path)  do
+          %button.btn.btn-default.navbar-btn{:type => "button"}
+            Login
+        = link_to(new_user_registration_path)  do
+          %button.btn.btn-default.navbar-btn{:type => "button"}
+            Register

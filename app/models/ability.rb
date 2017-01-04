@@ -6,6 +6,7 @@ class Ability
       can :manage, :all
     else
       can :manage, Dashboard, {user_id: user.id}
+      can :manage, ComponentDashboard, {dashboard: {user_id: user.id}}
     end
   end
 end
