@@ -12,6 +12,8 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     //   alert("There was an error while loading :(");
     // });
 
+    var colors = ["color1", "color2", "color3", "color4"];
+
     for(var i = 0; i < 10; i++){
       addDashboardComponent({
         col: i%6,

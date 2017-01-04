@@ -15,7 +15,6 @@
 
 
  // Vendors (contains 3rd-party styles)
-
 @import "custom-bootstrap";
 @import "bootswatch/variables";
 @import "bootswatch/bootswatch";
@@ -31,17 +30,17 @@
 @import "typo";
 
 // Layouts
-@import "dashboards";
+@import "layout/general";
 
 
 // Components (contains each self-contained component)
 @import "components/navbar";
 @import "components/forms";
+@import "components/buttons";
 
 
 // Pages (contains page-specific styling, if necessary)
-@import "pages";
-
+@import "pages/dashboards";
 
 // helpers
 @import "helpers/utilities";

@@ -1,6 +1,4 @@
 
-
-
 // Main Navbar
 // --------------------------------------------------
 
@@ -13,16 +11,16 @@
     font-weight: 700;
   }
 
-
   a {
     color: $c-seconday;
   }
 }
 
 
-// User Navbar
+// Menu bars
 // --------------------------------------------------
 
-.userBar {
-
+.menuBar {
+  padding: 1em ;
+  border-bottom: 1px solid $br-light;
 }

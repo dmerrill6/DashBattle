@@ -1,6 +1,7 @@
 
 
 $c-primary: #F34F57;
+$c-primary-light: #FED0D2;
 $c-seconday: #000;
 
 
@@ -9,7 +10,15 @@ $c-seconday: #000;
 
 
 // Basicos
+
+// color text
 $c-text: $c-seconday;
 
+
+// Box style
 $bg-primary: $c-primary;
+
+$br-light: $c-primary-light;
+
+// Modificator colors
 $c-hover-bg: salmon;
