@@ -3,7 +3,7 @@
     %h1 Creating Dashboard
     =form_for Dashboard.new do |f|
       =f.label :name
-      =f.text_field :name, class: "form-control"
+      =f.text_field :name, class: "form-control form-control--dash"
       =f.hidden_field :user_id, value: current_user.id
       %br
 
