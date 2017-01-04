@@ -17,7 +17,7 @@
           .loading-component{'ng-if'=>'dashboardComponent.loaded == false', 'ng-cloak'=>''}
             .fa.fa-spin.fa-circle-o-notch
           %h2.text-center
-            {{dashboardComponent.amount}}
+            {{dashboardComponent.amount | number}}
         .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
           %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}
 
