@@ -118,5 +118,5 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     draggable: {
       enabled: true // whether dragging items is supported
     }
-};
+  };
 }]);

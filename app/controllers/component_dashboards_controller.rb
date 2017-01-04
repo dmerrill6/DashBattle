@@ -16,6 +16,7 @@ class ComponentDashboardsController < ApplicationController
   def new
     @component_dashboard = ComponentDashboard.new
     @dashboard = Dashboard.find(params[:dashboard_id])
+    @components_json = Component.all.to_json
 
   end
 
