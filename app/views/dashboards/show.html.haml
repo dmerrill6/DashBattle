@@ -15,3 +15,6 @@
             {{dashboardComponent.amount}}
           .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
             %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}
+
+        = link_to "<button>New Component Dashboard</button>".html_safe, new_dashboard_component_dashboard_path(dashboard_id: @dashboard.id)
+        = link_to "<button>List Component Dashboards</button>".html_safe, dashboard_component_dashboards_path(dashboard_id: @dashboard.id)

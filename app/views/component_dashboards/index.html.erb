@@ -1,0 +1,29 @@
+<h1> Component Dashboards</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component id</th>
+      <th>Dashboard id</th>
+      <th>col</th>
+      <th>row</th>
+      <th>endpoint</th>
+      <th>secret key</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @component_dashboards.each do |component_dashboard| %>
+      <tr>
+        <td><%= component_dashboard.component_id %></td>
+        <td><%= component_dashboard.dashboard_id %></td>
+        <td><%= component_dashboard.col %></td>
+        <td><%= component_dashboard.row %></td>
+        <td><%= component_dashboard.endpoint %></td>
+        <td><%= component_dashboard.secret_key %></td>
+        <td><%= button_to "Edit", edit_dashboard_component_dashboard_path(:id => component_dashboard.id), :method => :get %></td>
+        <td><%= button_to "Delete", dashboard_component_dashboard_path(:id => component_dashboard.id), :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

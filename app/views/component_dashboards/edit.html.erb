@@ -1,0 +1,38 @@
+<h1> Edit Component Dashboards</h1>
+
+<%= form_for([@dashboard, @component_dashboard]) do |f| %>
+
+
+
+<div class="field">
+  <%= f.label :endpoint %><br>
+  <%= f.text_field :endpoint %>
+</div>
+<div class="field">
+ <%= f.label :secret_key %><br>
+ <%= f.text_field :secret_key %>
+</div>
+
+<div class="field">
+ <%= f.label :component_id %><br>
+ <%= f.collection_select :component_id, Component.all ,:id,:name, {:include_blank => false} %>
+</div>
+<div class="field">
+ <%= f.label :dashboard_id %><br>
+ <%= f.number_field :dashboard_id %>
+</div>
+
+<div class="field">
+ <%= f.label :col %><br>
+ <%= f.number_field :col%>
+</div>
+<div class="field">
+ <%= f.label :row %><br>
+ <%= f.number_field :row %>
+</div>
+
+
+<div class="actions">
+    <%= f.submit "Update", :class => "button-link"  %>
+  </div>
+<% end %>
