@@ -62,7 +62,7 @@ class ComponentDashboardsController < ApplicationController
 
   def component_dashboard_params
 		params.require(:component_dashboard).permit(:component_id, :col, :row, :endpoint,
-    :secret_key
+    :secret_key, :response_data_location, :refresh_time, :title, :subtitle
 		)
 	end
 
