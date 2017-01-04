@@ -48,6 +48,7 @@
   height: 55px;
   padding: 1em;
   align-items: center;
+  background-color: salmon;
 
   @media screen and (min-width: $screen-sm-min){
     width: 50%;
@@ -56,13 +57,15 @@
 }
 .menuBar-left {
   @extend %menuBar-colbase;
-  background-color: aquamarine;
 }
 
 .menuBar-right {
   @extend %menuBar-colbase;
-  background-color: deepskyblue;
-  text-align: right;
+
+
+  @media screen and (min-width: $screen-sm-min){
+    text-align: right;
+  }
 }
 
 // item dentro de alugun menu bar
