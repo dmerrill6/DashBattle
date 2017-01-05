@@ -1,26 +1,24 @@
 .userBar
 
+.dashboard-container.clearfix{'ng-controller'=>'DashboardsController', 'ng-cloak'=>'', "ng-style"=>"{'background-color':bgcolor}"}
+  %h1.text-center{"ng-init"=>"dashboardId = #{@dashboard.id}"}
+    =@dashboard.name
+  .gridster-container{'gridster'=>'gridsterOpts', 'ng-init'=>"fetchDashboardComponents('#{dashboard_component_dashboards_path(@dashboard, format: :json)}')"}
+    %ul
+      %li{'gridster-item'=>'dashboardComponent', 'ng-repeat'=>"dashboardComponent in dashboardComponents"}
+        .gdstr-header.amount{'ng-if'=>'dashboardComponent.component.data_type == "amount"'}
+          %h3.gdstr-title
+            {{dashboardComponent.title}}
+          %p.subtitle
+            {{dashboardComponent.subtitle}}
 
-.controller{'ng-controller'=>'DashboardsController'}
-  .dashboard-container.clearfix{"ng-style"=>"{'background-color':bgcolor}"}
-    %h1.text-center
-      =@dashboard.name
-    .gridster-container{'gridster'=>'gridsterOpts', 'ng-init'=>"fetchDashboardComponents('#{root_path}')"}
-      %ul
-        %li{'gridster-item'=>'dashboardComponent', 'ng-repeat'=>"dashboardComponent in dashboardComponents"}
-          .gdstr-header.amount{'ng-if'=>'dashboardComponent.component.data_type == "amount"'}
-            %h3.gdstr-title
-              {{dashboardComponent.title}}
-
-            %p.subtitle
-              {{dashboardComponent.subtitle}}
-
+          .loading-component{'ng-if'=>'dashboardComponent.loaded == false', 'ng-cloak'=>''}
+            .fa.fa-spin.fa-circle-o-notch
+          %h2.text-center
             {{dashboardComponent.amount}}
-          .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
-            %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}
+        .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
+          %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}
 
-            = link_to "<button>New Component Dashboard</button>".html_safe, new_dashboard_component_dashboard_path(dashboard_id: @dashboard.id)
-            = link_to "<button>List Component Dashboards</button>".html_safe, dashboard_component_dashboards_path(dashboard_id: @dashboard.id)
-            %p{"ng-style"=>"{'background-color':bgcolor}"}
-              color = {{bgcolor}}
-            %color-picker{"ng-model" => "bgcolor", "options" => "color_picker_options"}
+  = link_to "<button>New Component Dashboard</button>".html_safe, new_dashboard_component_dashboard_path(dashboard_id: @dashboard.id)
+  = link_to "<button>List Component Dashboards</button>".html_safe, dashboard_component_dashboards_path(dashboard_id: @dashboard.id)
+  %button.fa.fa-paint-brush.btn.btn-default.btn-sm{:colorpicker => "", "aria-hidden" => "true", "colorpicker-position" => "top", "ng-model" => "bgcolor","ng-init" => "bgcolor='#{@dashboard.dashboard_color}'", :type => "text", "ng-change" => "colorPickerChange(bgcolor)"} 

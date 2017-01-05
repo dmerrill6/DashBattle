@@ -21,4 +21,5 @@
 //= require tinycolor/dist/tinycolor-min
 //= require angular-chart.js/dist/angular-chart.min
 //= require angularjs-color-picker/dist/angularjs-color-picker.min
+//= require angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min
 //= require_tree .

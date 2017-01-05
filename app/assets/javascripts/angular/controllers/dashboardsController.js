@@ -1,50 +1,117 @@
 controllers.controller('DashboardsController', ['$scope', '$http', function($scope, $http){
+  $scope.dashboardId;
+
+  $scope.colorPickerChange = function(color) {
+      $http({
+         method: 'patch',
+         url: '/dashboards/' + $scope.dashboardId + ".json",
+         data: {
+           dashboard: {
+             dashboard_color: color
+           }
+         }
+       }).then(function successCallback(data){
+         console.log(data)
+       }, function errorCallback(data){
+         alert("There was an error when saving background");
+       });
+
+   };
+
   $scope.dashboardComponents = [];
   $scope.fetchDashboardComponents = function(dashboardComponentsPath){
-    // $http({
-    //   url: dashboardComponentsPath,
-    //   method: "GET"
-    // }).then(function successCallback(data){
-    //   for(var i = 0; i < data.length; i++){
-    //     addDashboardComponent(data[i]);
-    //   }
-    // }, function errorCallback(data){
-    //   alert("There was an error while loading :(");
-    // });
-
-    for(var i = 0; i < 10; i++){
-      addDashboardComponent({
-        col: i%6,
-        row: 0,
-        endpoint: "test",
-        sizeX: 1,
-        sizeY: 1,
-        amount: Math.round(Math.random() * 1000000, 0),
-        title: "Papinotas Enviados",
-        subtitle: "Por colegio " + i,
-        component: {
-          data_type: 'amount'
-        }
-      });
-    }
-    addDashboardComponent({
-      col:0,
-      row:2,
-      endpoint: "test",
-      sizeX: 2,
-      sizeY: 1,
-      data: {
-        labels: ['Colegio Papinotas', 'Hunneus', 'Rial Test School', 'Instituto Nacional', 'República de Chile', 'Liceo X'],
-        values: [100, 90, 85, 70, 50, 28]
-      },
-      component: {
-        data_type: 'bar-chart'
+    $http({
+      url: dashboardComponentsPath,
+      method: "GET"
+    }).then(function successCallback(data){
+      for(var i = 0; i < data.data.length; i++){
+        addDashboardComponent(data.data[i]);
       }
+    }, function errorCallback(data){
+      alert("There was an error while loading :(");
     });
+    //
+    // for(var i = 0; i < 10; i++){
+    //   addDashboardComponent({
+    //     col: i%6,
+    //     row: 0,
+    //     endpoint: "test",
+    //     sizeX: 1,
+    //     sizeY: 1,
+    //     amount: Math.round(Math.random() * 1000000, 0),
+    //     title: "Papinotas Enviados",
+    //     subtitle: "Por colegio " + i,
+    //     component: {
+    //       data_type: 'amount'
+    //     }
+    //   });
+    // }
+    // addDashboardComponent({
+    //   col:0,
+    //   row:2,
+    //   endpoint: "test",
+    //   sizeX: 2,
+    //   sizeY: 1,
+    //   data: {
+    //     labels: ['Colegio Papinotas', 'Hunneus', 'Rial Test School', 'Instituto Nacional', 'República de Chile', 'Liceo X'],
+    //     values: [100, 90, 85, 70, 50, 28]
+    //   },
+    //   component: {
+    //     data_type: 'bar-chart'
+    //   }
+    // });
+  }
+
+  refreshDashboardComponent = function(dashboardComponent){
+    $http({
+      method: 'GET',
+      url: dashboardComponent.endpoint
+    }).then(function successCallback(response) {
+      if(dashboardComponent.component.data_type == 'amount')
+        dashboardComponent.amount = parseDashboardComponentResponseDataLocation(response.data, dashboardComponent.response_data_location);
+      else {
+        // Complete with other types
+      }
+
+      dashboardComponent.loaded = true;
+
+    }, function errorCallback(response) {
+      console.log("error");
+    });
+
   }
 
   var addDashboardComponent = function(dashboardComponent){
+    if(dashboardComponent.component.width != null)
+      dashboardComponent.sizeX = dashboardComponent.component.width;
+    if(dashboardComponent.component.height != null)
+      dashboardComponent.sizeY = dashboardComponent.component.height;
+    dashboardComponent.loaded = false;
     $scope.dashboardComponents.push(dashboardComponent);
+    refreshDashboardComponent(dashboardComponent);
+    setComponentTicker(dashboardComponent);
+  }
+
+  var setComponentTicker = function(dashboardComponent){
+    setInterval(function(){
+      refreshDashboardComponent(dashboardComponent);
+    }, dashboardComponent.refresh_time);
+  }
+
+
+  var parseDashboardComponentResponseDataLocation = function(o, s) {
+    s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+    s = s.replace(/^\./, '');           // strip a leading dot
+    var a = s.split('.');
+    for (var i = 0, n = a.length; i < n; ++i) {
+        var k = a[i];
+        if (k in o) {
+            o = o[k];
+        } else {
+            return;
+        }
+    }
+    return o;
   }
 
   $scope.gridsterOpts = {

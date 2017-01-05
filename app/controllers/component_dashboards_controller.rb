@@ -7,6 +7,10 @@ class ComponentDashboardsController < ApplicationController
   def index
     @dashboard = Dashboard.find(params[:dashboard_id])
     @component_dashboards = @dashboard.component_dashboards
+    respond_to do |format|
+      format.html{}
+      format.json{render json: @component_dashboards}
+    end
   end
 
   def new
@@ -58,7 +62,7 @@ class ComponentDashboardsController < ApplicationController
 
   def component_dashboard_params
 		params.require(:component_dashboard).permit(:component_id, :col, :row, :endpoint,
-    :secret_key
+    :secret_key, :response_data_location, :refresh_time, :title, :subtitle
 		)
 	end
 

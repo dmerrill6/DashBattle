@@ -3,10 +3,24 @@
 <%= form_for([@dashboard, @component_dashboard]) do |f| %>
 
 
-
+<div class="field">
+  <%= f.label :title %><br>
+  <%= f.text_field :title %>
+</div><div class="field">
+  <%= f.label :subtitle %><br>
+  <%= f.text_field :subtitle %>
+</div>
 <div class="field">
   <%= f.label :endpoint %><br>
   <%= f.text_field :endpoint %>
+</div>
+<div class="field">
+ <%= f.label :response_data_location %><br>
+ <%= f.text_field :response_data_location %>
+</div>
+<div class="field">
+ <%= f.label :refresh_time %> <small>(In seconds)</small><br>
+ <%= f.number_field :refresh_time %>
 </div>
 <div class="field">
  <%= f.label :secret_key %><br>
@@ -25,6 +39,7 @@
  <%= f.label :row %><br>
  <%= f.number_field :row %>
 </div>
+
 
 
 <div class="actions">
