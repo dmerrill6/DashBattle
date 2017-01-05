@@ -15,15 +15,17 @@
 
 
  // Vendors (contains 3rd-party styles)
-
 @import "custom-bootstrap";
 @import "bootswatch/variables";
 @import "bootswatch/bootswatch";
 @import "bootstrap_and_overrides";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import "angular-gridster/dist/angular-gridster.css";
 
 
 // Settings (global mixins, functions, helper selectors, etc.)
+@import "settings/variables";
 @import "settings/colors";
 
 // Base (global and generic styles, such as resets, typography, etc.)
@@ -31,23 +33,19 @@
 @import "typo";
 
 // Layouts
-@import "dashboards";
+@import "layout/general";
 
 
 // Components (contains each self-contained component)
 @import "components/navbar";
 @import "components/forms";
+@import "components/buttons";
 
 
 // Pages (contains page-specific styling, if necessary)
-@import "pages";
-
+@import "pages/dashboards";
 
 // helpers
 @import "helpers/utilities";
-
-// Font Awesome
-@import "font-awesome-sprockets";
-@import "font-awesome";
 
 // Shame

@@ -1,0 +1,25 @@
+
+
+.main-header{
+  background-color: rgb(80, 48, 112);
+  text-align: center;
+  padding: 10em;
+  min-height: 100em;
+  h1{
+    color: white;
+  }
+}
+
+
+
+
+
+// footer
+.footer {
+  margin-top: 2em;
+  padding-top: 1.2em;
+  font-family: $font-family-bold;
+  color: $c-primary-light;
+  text-align: center;
+
+}

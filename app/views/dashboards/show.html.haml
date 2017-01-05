@@ -1,4 +1,7 @@
-.userBar
+
+=render partial:"menubar/usermenu"
+
+
 .dashboard-container.clearfix{'ng-controller'=>'DashboardsController', 'ng-cloak'=>''}
   %h1.text-center
     =@dashboard.name
@@ -14,9 +17,10 @@
           .loading-component{'ng-if'=>'dashboardComponent.loaded == false', 'ng-cloak'=>''}
             .fa.fa-spin.fa-circle-o-notch
           %h2.text-center
-            {{dashboardComponent.amount}}
+            {{dashboardComponent.amount | number}}
         .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
           %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels'}
-
-  = link_to "<button>New Component Dashboard</button>".html_safe, new_dashboard_component_dashboard_path(dashboard_id: @dashboard.id)
-  = link_to "<button>List Component Dashboards</button>".html_safe, dashboard_component_dashboards_path(dashboard_id: @dashboard.id)
+        .iframe{'ng-if'=>'dashboardComponent.component.data_type == "iframe"'}
+          %iframe{ 'src'=>'http://deploy-battle.herokuapp.com',  width: '100%', height: '100%' }
+  = link_to "<button class='btn btn-default'>New Component Dashboard</button>".html_safe, new_dashboard_component_dashboard_path(dashboard_id: @dashboard.id)
+  = link_to "<button class='btn btn-default'>List Component Dashboards</button>".html_safe, dashboard_component_dashboards_path(dashboard_id: @dashboard.id)

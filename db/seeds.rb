@@ -11,3 +11,4 @@ Component.create({data_type: 'goal', width: '1', height: '1', name: 'Goal Compon
 Component.create({data_type: 'line-chart', width: '2', height: '1', name: 'Line Component' })
 Component.create({data_type: 'bar-chart', width: '2', height: '1', name: 'Bar Component' })
 Component.create({data_type: 'pie-chart', width: '2', height: '1', name: 'Pie Component' })
+Component.create({data_type: 'iframe', width: '2', height: '2', name: 'Iframe' })
