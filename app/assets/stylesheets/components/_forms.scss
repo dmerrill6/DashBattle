@@ -1,7 +1,17 @@
 
+// contenedores de formularios
+
+.form-wrapper {
+  @media screen and (min-width: $screen-sm-min){
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+  }
+}
+
 
 // formato especial de inputs
-.form-control--dash {
+.form-control {
   background-color: transparent;
   color: white;
 }

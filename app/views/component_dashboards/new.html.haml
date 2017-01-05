@@ -1,0 +1,43 @@
+.container
+  .form-wrapper
+    %h1 New Component Dashboards
+    = form_for([@dashboard, @component_dashboard]) do |f|
+      .form-group
+        = f.label :title, class: 'control-label'
+        %br/
+        = f.text_field :title, class: 'form-control'
+      .form-group
+        = f.label :subtitle, class: 'control-label'
+        %br/
+        = f.text_field :subtitle, class: 'form-control'
+      .form-group
+        = f.label :endpoint, class: 'control-label'
+        %br/
+        = f.text_field :endpoint, class: 'form-control'
+      .form-group
+        = f.label :response_data_location, class: 'control-label'
+        %br/
+        = f.text_field :response_data_location, class: 'form-control'
+      .form-group
+        = f.label :refresh_time, class: 'control-label'
+        %small (In seconds)
+        %br/
+        = f.number_field :refresh_time, class: 'form-control'
+      .form-group
+        = f.label :secret_key, class: 'control-label'
+        %br/
+        = f.text_field :secret_key, class: 'form-control'
+      .form-group
+        = f.label :component_id, class: 'control-label'
+        %br/
+        = f.collection_select :component_id, Component.all ,:id,:name, {:include_blank => false}, class: 'form-control'
+      .form-group
+        = f.label :col, class: 'control-label'
+        %br/
+        = f.number_field :col, class: 'form-control'
+      .form-group
+        = f.label :row, class: 'control-label'
+        %br/
+        = f.number_field :row, class: 'form-control'
+      .actions.text-right
+        = f.submit "Create ComponentDashboard", :class => "btn btn-default"
