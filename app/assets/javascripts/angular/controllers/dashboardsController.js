@@ -1,22 +1,23 @@
 controllers.controller('DashboardsController', ['$scope', '$http', function($scope, $http){
   $scope.dashboardId;
 
-  $scope.colorPickerChange = function(color) {
-      $http({
-         method: 'patch',
-         url: '/dashboards/' + $scope.dashboardId + ".json",
-         data: {
-           dashboard: {
-             dashboard_color: color
+$scope.$on('colorpicker-closed', function(event, data) {
+      var color = data.value
+        $http({
+           method: 'patch',
+           url: '/dashboards/' + $scope.dashboardId + ".json",
+           data: {
+             dashboard: {
+               dashboard_color: color
+             }
            }
-         }
-       }).then(function successCallback(data){
-         console.log(data)
-       }, function errorCallback(data){
-         alert("There was an error when saving background");
-       });
+         }).then(function successCallback(data){
+           console.log(data)
+         }, function errorCallback(data){
+           alert("There was an error when saving background");
+         });
+    });
 
-   };
 
   $scope.dashboardComponents = [];
   $scope.fetchDashboardComponents = function(dashboardComponentsPath){
