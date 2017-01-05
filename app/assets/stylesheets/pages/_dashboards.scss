@@ -95,3 +95,17 @@ $loader-font-size: 36pt;
   background-size: cover;
   min-height: 400px;
 }
+.iframe{
+  width: 200%;
+  height: 200%;
+}
+.iframe iframe{
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.5);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+  height: 200%;
+
+}
