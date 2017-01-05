@@ -107,5 +107,7 @@ $loader-font-size: 36pt;
   -webkit-transform: scale(0.5);
   -webkit-transform-origin: 0 0;
   height: 200%;
-
+}
+.btn.selected{
+ background-color: #ff0;
 }

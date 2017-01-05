@@ -28,6 +28,8 @@ development:
   port: 5432
   pool: 10
   host: localhost
+  user: postgres
+  password: esmagnifico
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
