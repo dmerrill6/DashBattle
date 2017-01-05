@@ -27,8 +27,10 @@ class ComponentDashboardsController < ApplicationController
       if @component_dashboard.save
         @dashboard.component_dashboards << @component_dashboard
         format.html{redirect_to action: :index}
+        format.json{render json: @component_dashboard, status: :ok}
       else
         format.html{redirect_to action: :new, notice: "ComponentDashboard could not be created."}
+        format.json{render json: @component_dashboard.errors, status: :unprocessable_entity}
       end
     end
   end

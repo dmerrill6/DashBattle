@@ -70,7 +70,7 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     dashboardComponent.loaded = false;
     $scope.dashboardComponents.push(dashboardComponent);
     refreshDashboardComponent(dashboardComponent);
-    $setComponentTicker(dashboardComponent);
+    setComponentTicker(dashboardComponent);
   }
 
   var setComponentTicker = function(dashboardComponent){
