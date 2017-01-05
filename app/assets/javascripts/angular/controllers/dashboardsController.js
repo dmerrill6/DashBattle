@@ -62,6 +62,7 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     // });
   }
 
+
   refreshDashboardComponent = function(dashboardComponent){
     $http({
       method: 'GET',
@@ -89,13 +90,14 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     dashboardComponent.loaded = false;
     $scope.dashboardComponents.push(dashboardComponent);
     refreshDashboardComponent(dashboardComponent);
-    setComponentTicker(dashboardComponent);
+    if(dashboardComponent.refresh_time != null && dashboardComponent.refresh_time != 0)
+      setComponentTicker(dashboardComponent);
   }
 
   var setComponentTicker = function(dashboardComponent){
     setInterval(function(){
       refreshDashboardComponent(dashboardComponent);
-    }, dashboardComponent.refresh_time);
+    }, dashboardComponent.refresh_time * 1000);
   }
 
 
@@ -143,5 +145,5 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     draggable: {
       enabled: true // whether dragging items is supported
     }
-};
+  };
 }]);

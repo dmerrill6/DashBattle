@@ -1,0 +1,17 @@
+
+
+// overwrite default button
+
+.btn {
+  box-shadow: none;
+}
+.btn-default {
+  border: 1px solid $br-color;
+  background-color: $c-primary;
+  color: white;
+  font-family: $font-family-bold;
+
+  &:hover {
+    color: $c-primary;
+  }
+}

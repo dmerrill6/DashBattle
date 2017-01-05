@@ -1,11 +1,92 @@
-.row
-  .col-sm-8.col-sm-offset-2
-    %h1 Creating Dashboard
-    =form_for Dashboard.new do |f|
-      =f.label :name
-      =f.text_field :name, class: "form-control form-control--dash"
-      =f.hidden_field :user_id, value: current_user.id
-      %br
 
-      %button.btn.btn-success{type: 'submit'}
-        Create
+.div{'ng-controller'=>'newDashboardComponentsController', 'ng-init'=>"initComponents(#{@components_json})"}
+
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="users"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "users")}'}
+    Cantidad usuarios
+
+
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="messages"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "messages")}'}
+    Cantidad mensajes enviados
+
+
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="diplomas"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "diplomas")}'}
+    Cantidad diplomas enviados
+
+
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="absences"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "absences")}'}
+    Cantidad asistencias
+
+
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="ranking"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "ranking")}'}
+    Ranking de uso
+
+
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="deploy_battle"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "deploy_battle")}'}
+    Deploy Battle
+
+
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="promotion"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "promotion")}'}
+    Cambio de año
+
+
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="surveys"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "surveys")}'}
+    Encuestas
+
+
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="custom"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "custom")}'}
+    Custom dashboard component
+
+  .div{'ng-if'=>'currentSelectedDashboardComponent=="custom"'}
+    %h1 New Component Dashboards
+    = form_for([@dashboard, @component_dashboard]) do |f|
+      .field
+        = f.label :title
+        %br/
+        = f.text_field :title
+      .field
+        = f.label :subtitle
+        %br/
+        = f.text_field :subtitle
+      .field
+        = f.label :endpoint
+        %br/
+        = f.text_field :endpoint
+      .field
+        = f.label :response_data_location
+        %br/
+        = f.text_field :response_data_location
+      .field
+        = f.label :refresh_time
+        %small (In seconds)
+        %br/
+        = f.number_field :refresh_time
+      .field
+        = f.label :secret_key
+        %br/
+        = f.text_field :secret_key
+      .field
+        = f.label :component_id
+        %br/
+        = f.collection_select :component_id, Component.all ,:id,:name, {:include_blank => false}
+      = f.hidden_field :dashboard_id
+      .field
+        = f.label :col
+        %br/
+        = f.number_field :col
+      .field
+        = f.label :row
+        %br/
+        = f.number_field :row
+
+      .actions
+        = f.submit "Create ComponentDashboard", :class => "button-link"
+
+  .div{'ng-if'=>'currentSelectedDashboardComponent=="users" || currentSelectedDashboardComponent=="messages" || currentSelectedDashboardComponent=="diplomas" || currentSelectedDashboardComponent=="absences"|| currentSelectedDashboardComponent=="ranking" || currentSelectedDashboardComponent=="promotion" || currentSelectedDashboardComponent=="surveys"' }
+    %form{'ng-submit'=>"createPapinotasDashboard('#{dashboard_component_dashboards_path(format: :json)}', #{@dashboard.id}, papinotasApiKey, title, subtitle)"}
+      %label Ingresa título
+      %input{'ng-model'=>'title'}
+      %label Ingresa subtitulo
+      %input{'ng-model'=>'subtitle'}
+      %label Ingresa tu Api Key de Papinotas
+      %input{'ng-model'=>'papinotasApiKey'}
+      %button{'type'=>'submit'} Crear componente
