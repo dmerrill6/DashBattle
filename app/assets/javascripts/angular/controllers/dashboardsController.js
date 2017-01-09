@@ -1,8 +1,8 @@
-controllers.controller('DashboardsController', ['$scope', '$http', function($scope, $http){
+controllers.controller('DashboardsController', ['$scope', '$http',function($scope, $http){
   $scope.dashboardId;
 
-$scope.$on('colorpicker-closed', function(event, data) {
-      var color = data.value
+ $scope.$on('colorpicker-closed', function(event, data) {
+      var color = data.value;
         $http({
            method: 'patch',
            url: '/dashboards/' + $scope.dashboardId + ".json",
@@ -69,9 +69,11 @@ $scope.$on('colorpicker-closed', function(event, data) {
       method: 'GET',
       url: dashboardComponent.endpoint
     }).then(function successCallback(response) {
-      if(dashboardComponent.component.data_type == 'amount')
+      if(dashboardComponent.component.data_type == 'amount'){
         dashboardComponent.amount = parseDashboardComponentResponseDataLocation(response.data, dashboardComponent.response_data_location);
-      else {
+      }
+      else if(dashboardComponent.component.data_type == 'bar-chart'){
+        dashboardComponent.data = parseBarChart(response.data.data[0].top_10);
         // Complete with other types
       }
 
@@ -115,6 +117,20 @@ $scope.$on('colorpicker-closed', function(event, data) {
         }
     }
     return o;
+  }
+
+  var parseBarChart = function(data) {
+    var data_arr = {
+      labels: [],
+      values: []
+    }
+
+    for(var i =0, n=data.length; i < n; ++i)
+    {
+        data_arr.labels.push(data[i][0]);
+        data_arr.values.push(data[i][1]);
+    }
+    return data_arr;
   }
 
   $scope.gridsterOpts = {
