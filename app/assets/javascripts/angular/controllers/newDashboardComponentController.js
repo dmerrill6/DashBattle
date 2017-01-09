@@ -4,6 +4,7 @@ controllers.controller('newDashboardComponentsController', ['$scope', '$http', f
 
 
 	$scope.createPapinotasDashboard = function(path, idDashboard, apiKey, title, subtitle){
+		var refresh_time = 10;
 		if($scope.currentSelectedDashboardComponent == 'users'){
 			var endpoint = 'http://papinotas-goten.us-west-2.elasticbeanstalk.com/papinotas/api/v2.0/get_quantity_users?token='
 			var response_data_location = 'data[0].cantidad';
@@ -16,6 +17,7 @@ controllers.controller('newDashboardComponentsController', ['$scope', '$http', f
 			var endpoint = 'http://papinotas-goten.us-west-2.elasticbeanstalk.com/papinotas/api/v2.0/sms_top_10_institution?token='
 			var response_data_location = 'data[0].top_10';
 			var component_type = 'bar-chart';
+			refresh_time = 1000;
 		}
 
 		$http({
@@ -27,7 +29,7 @@ controllers.controller('newDashboardComponentsController', ['$scope', '$http', f
 					'subtitle' : subtitle,
 					'endpoint' : endpoint+apiKey,
 					'response_data_location' : response_data_location,
-					'refresh_time' : 1000,
+					'refresh_time' : refresh_time,
 					'component_id' : $scope.components[component_type].id,
 					'col' : 1,
 					'row' : 1,
