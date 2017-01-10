@@ -70,6 +70,9 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
       url: dashboardComponent.endpoint
     }).then(function successCallback(response) {
       if(dashboardComponent.component.data_type == 'amount'){
+        dashboardComponent.amountOld = dashboardComponent.amount;
+        if(dashboardComponent.amountOld == null)
+          dashboardComponent.amountOld = 0;
         dashboardComponent.amount = parseDashboardComponentResponseDataLocation(response.data, dashboardComponent.response_data_location);
       }
       else if(dashboardComponent.component.data_type == 'bar-chart'){
