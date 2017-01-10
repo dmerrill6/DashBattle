@@ -96,12 +96,14 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
                 }
               }
             }
-
+          },
+          title: {
+            display: true,
+            text: dashboardComponent.title + " - " + dashboardComponent.subtitle
           }
         };
-        // Complete with other types
       }
-
+      // Complete with other types
       dashboardComponent.loaded = true;
 
     }, function errorCallback(response) {
