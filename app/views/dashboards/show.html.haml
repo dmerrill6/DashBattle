@@ -15,12 +15,15 @@
             {{dashboardComponent.title}}
           %p.subtitle
             {{dashboardComponent.subtitle}}
-
           .loading-component{'ng-if'=>'dashboardComponent.loaded == false', 'ng-cloak'=>''}
             .fa.fa-spin.fa-circle-o-notch
-          %h2.text-center
-            {{dashboardComponent.amount | number}}
+          %h2.text-center{'ng-count-to'=>'{{dashboardComponent.amount}}', value: '{{dashboardComponent.amountOld}}', duration: '1', filter: "number"}
+
         .bar-chart{'ng-if'=>'dashboardComponent.component.data_type == "bar-chart"'}
+          %h3.gdstr-title
+            {{dashboardComponent.title}}
+          %p.subtitle
+            {{dashboardComponent.subtitle}}
           .loading-component{'ng-if'=>'dashboardComponent.loaded == false', 'ng-cloak'=>''}
             .fa.fa-spin.fa-circle-o-notch
           %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels', 'chart-options' => 'dashboardComponent.chart_options'}
