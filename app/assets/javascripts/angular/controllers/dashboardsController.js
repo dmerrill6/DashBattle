@@ -74,6 +74,28 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
       }
       else if(dashboardComponent.component.data_type == 'bar-chart'){
         dashboardComponent.data = parseBarChart(response.data.data[0].top_10);
+        dashboardComponent.chart_options = {
+          tooltips: {
+            custom: function(tooltip){
+              if(!tooltip){
+                return;
+              }
+              else{
+                if(tooltip.dataPoints){
+                  var new_title = dashboardComponent.data.full_names[tooltip.dataPoints[0].index];
+                  if(new_title){
+                    new_title = formatSchoolName(new_title);
+                    tooltip.title = [new_title];
+                    tooltip.titleFontSize = 10;
+                    tooltip.width = new_title.length * 6;
+                    tooltip.caretSize = 0;
+                  }
+                }
+              }
+            }
+
+          }
+        };
         // Complete with other types
       }
 
@@ -82,6 +104,19 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
     }, function errorCallback(response) {
       console.log("error");
     });
+
+  }
+
+  var formatSchoolName = function(name){
+
+    name = name.trim();
+    if(name.includes("-")){
+      name = name.split("-")[1];
+    }
+    name = name.trim();
+    name = name.toLowerCase();
+    name = name.charAt(0).toUpperCase() + name.slice(1);
+    return name;
 
   }
 
@@ -122,12 +157,14 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
   var parseBarChart = function(data) {
     var data_arr = {
       labels: [],
-      values: []
+      values: [],
+      full_names: []
     }
 
     for(var i =0, n=data.length; i < n; ++i)
     {
         data_arr.labels.push(data[i][0]);
+        data_arr.full_names.push(data[i][1]);
         data_arr.values.push(data[i][2]);
     }
     return data_arr;

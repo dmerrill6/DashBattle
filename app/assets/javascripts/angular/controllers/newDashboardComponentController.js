@@ -17,7 +17,7 @@ controllers.controller('newDashboardComponentsController', ['$scope', '$http', f
 			var endpoint = 'http://papinotas-goten.us-west-2.elasticbeanstalk.com/papinotas/api/v2.0/sms_top_10_institution?token='
 			var response_data_location = 'data[0].top_10';
 			var component_type = 'bar-chart';
-			refresh_time = 10;
+			refresh_time = 100;
 		}
 
 		$http({
