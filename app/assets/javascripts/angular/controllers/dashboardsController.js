@@ -128,7 +128,7 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
     for(var i =0, n=data.length; i < n; ++i)
     {
         data_arr.labels.push(data[i][0]);
-        data_arr.values.push(data[i][1]);
+        data_arr.values.push(data[i][2]);
     }
     return data_arr;
   }
