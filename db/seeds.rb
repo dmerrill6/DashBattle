@@ -13,3 +13,4 @@ Component.create({data_type: 'bar-chart', width: '2', height: '1', name: 'Bar Co
 Component.create({data_type: 'pie-chart', width: '2', height: '1', name: 'Pie Component' })
 Component.create({data_type: 'iframe', width: '2', height: '2', name: 'Iframe' })
 Component.create({data_type: 'ranking', width: '1', height: '1', name: 'Ranking Component' })
+Component.create({data_type: 'status-with-success-rate', width: '1', height: '1', name: 'Status with Success Rate Component' })

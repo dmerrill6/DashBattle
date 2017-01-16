@@ -103,6 +103,10 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
           }
         };
       }
+      else if(dashboardComponent.component.data_type == 'status-with-success-rate'){
+        dashboardComponent.success_rate = (response.data.result.success_rate*100)+ "%";
+        dashboardComponent.altera_status = response.data.result.altera_status;
+      }
       // Complete with other types
       dashboardComponent.loaded = true;
 
@@ -120,8 +124,13 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
     }
     name = name.trim();
     name = name.toLowerCase();
-    name = name.charAt(0).toUpperCase() + name.slice(1);
-    return name;
+    names = name.split(' ');
+    complete_name = "";
+    names.forEach((name) => {
+      this.complete_name =  complete_name + " " + name.charAt(0).toUpperCase() + name.slice(1);
+
+    });
+    return complete_name.trim()
 
   }
 

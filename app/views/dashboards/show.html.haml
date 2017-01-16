@@ -25,6 +25,20 @@
           %canvas.chart.chart-bar{'chart-data'=>'dashboardComponent.data.values', 'chart-labels'=>'dashboardComponent.data.labels', 'chart-options' => 'dashboardComponent.chart_options'}
         .iframe{'ng-if'=>'dashboardComponent.component.data_type == "iframe"', style: 'height:100%;'}
           %iframe{ 'src'=>'{{dashboardComponent.endpoint | trustAsResourceUrl}}',  width: '100%', height: '100%'}
+        .gdstr-header.amount{'ng-if'=>'dashboardComponent.component.data_type == "status-with-success-rate"'}
+          .loading-component{'ng-if'=>'dashboardComponent.loaded == false', 'ng-cloak'=>''}
+            .fa.fa-spin.fa-circle-o-notch
+          %h3.gdstr-title
+            {{dashboardComponent.title}}
+          %p.subtitle
+            Success rate: {{dashboardComponent.success_rate}}
+          %p
+            Status:
+            %strong.text-success{'ng-if' => 'dashboardComponent.altera_status == true'}
+              Ok
+            %strong.text-danger{'ng-if' => 'dashboardComponent.altera_status == false'}
+          .fa.fa-circle.fa-5x.text-success{'ng-if' => 'dashboardComponent.altera_status'}
+          .fa.fa-circle.fa-5x.text-danger{'ng-if' => '!dashboardComponent.altera_status'}
         .gdstr-header.amount{'ng-if'=>'dashboardComponent.component.data_type =="ranking"'}
           %h3.gdstr-title
             {{dashboardComponent.title}}

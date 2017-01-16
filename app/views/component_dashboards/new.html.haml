@@ -32,6 +32,8 @@
   %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="surveys"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "surveys")}'}
     Encuestas
 
+  %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="altera_status"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "altera_status")}'}
+    Altera Status
 
   %button.btn.btn-success{'ng-click'=>'currentSelectedDashboardComponent="custom"', 'ng-class'=>'{"selected":(currentSelectedDashboardComponent == "custom")}'}
     Custom dashboard component
@@ -81,7 +83,7 @@
       .actions
         = f.submit "Create ComponentDashboard", :class => "button-link"
 
-  .div{'ng-if'=>'currentSelectedDashboardComponent=="users" || currentSelectedDashboardComponent=="messages" || currentSelectedDashboardComponent=="diplomas" || currentSelectedDashboardComponent=="absences"|| currentSelectedDashboardComponent=="ranking" || currentSelectedDashboardComponent=="promotion" || currentSelectedDashboardComponent=="surveys"' }
+  .div{'ng-if'=>'currentSelectedDashboardComponent=="users" || currentSelectedDashboardComponent=="messages" || currentSelectedDashboardComponent=="diplomas" || currentSelectedDashboardComponent=="absences"|| currentSelectedDashboardComponent=="ranking" || currentSelectedDashboardComponent=="promotion" || currentSelectedDashboardComponent=="surveys" || currentSelectedDashboardComponent=="altera_status"' }
     %form{'ng-submit'=>"createPapinotasDashboard('#{dashboard_component_dashboards_path(format: :json)}', #{@dashboard.id}, papinotasApiKey, title, subtitle)"}
       %label Ingresa título
       %input{'ng-model'=>'title'}
