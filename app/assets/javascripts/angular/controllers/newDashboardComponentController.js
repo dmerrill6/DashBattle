@@ -42,7 +42,7 @@ controllers.controller('newDashboardComponentsController', ['$scope', '$http', f
 				}
 			}
 		}).then(function successCallback(response) {
-			debugger;
+					alert("Component created successfully");
 		}, function errorCallback(response) {
         	alert("I'm wrong father");
       	});

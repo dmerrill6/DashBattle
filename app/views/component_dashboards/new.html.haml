@@ -89,6 +89,6 @@
       %input{'ng-model'=>'title'}
       %label Ingresa subtitulo
       %input{'ng-model'=>'subtitle'}
-      %label Ingresa tu Api Key de Papinotas
-      %input{'ng-model'=>'papinotasApiKey'}
+      %label{'ng-if' => 'currentSelectedDashboardComponent != "altera_status"'} Ingresa tu Api Key de Papinotas
+      %input{'ng-model'=>'papinotasApiKey', 'ng-if' => 'currentSelectedDashboardComponent != "altera_status"'}
       %button{'type'=>'submit'} Crear componente
