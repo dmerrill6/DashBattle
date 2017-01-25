@@ -135,9 +135,9 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
   }
 
   var addDashboardComponent = function(dashboardComponent){
-    if(dashboardComponent.component.width != null)
+    if(dashboardComponent.sizeX == null)
       dashboardComponent.sizeX = dashboardComponent.component.width;
-    if(dashboardComponent.component.height != null)
+    if(dashboardComponent.sizeY == null)
       dashboardComponent.sizeY = dashboardComponent.component.height;
     dashboardComponent.loaded = false;
     $scope.dashboardComponents.push(dashboardComponent);
@@ -184,6 +184,45 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
     return data_arr;
   }
 
+  $scope.resized = function(event, $element, item) {
+      // sizes[0] = width
+      // sizes[1] = height
+      // gridster.
+      $http({
+         method: 'patch',
+         url: '/dashboards/' + $scope.dashboardId  + "/component_dashboards/" + item.id +  ".json",
+         data: {
+           component_dashboard: {
+             sizeX: item.sizeX,
+             sizeY: item.sizeY
+           }
+         }
+       }).then(function successCallback(data){
+       }, function errorCallback(data){
+         alert("There was an error when saving size");
+       });
+  };
+
+  $scope.moved = function(event, $element, item) {
+      // sizes[0] = width
+      // sizes[1] = height
+      // gridster.
+      $http({
+         method: 'patch',
+         url: '/dashboards/' + $scope.dashboardId  + "/component_dashboards/" + item.id +  ".json",
+         data: {
+           component_dashboard: {
+             col: item.col,
+             row: item.row
+           }
+         }
+       }).then(function successCallback(data){
+       }, function errorCallback(data){
+         alert("There was an error when saving pos");
+       });
+  };
+
+
   $scope.gridsterOpts = {
     columns: 6, // the width of the grid, in columns
     pushing: true, // whether to push other items out of the way on move or resize
@@ -208,10 +247,12 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
     minSizeY: 1, // minumum row height of an item
     maxSizeY: 2, // maximum row height of an item
     resizable: {
-       enabled: true
+       enabled: true,
+       stop: $scope.resized
     },
     draggable: {
-      enabled: true // whether dragging items is supported
+      enabled: true, // whether dragging items is supported
+      stop: $scope.moved
     }
   };
 }]);

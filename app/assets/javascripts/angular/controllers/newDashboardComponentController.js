@@ -38,6 +38,8 @@ controllers.controller('newDashboardComponentsController', ['$scope', '$http', f
 					'component_id' : $scope.components[component_type].id,
 					'col' : 1,
 					'row' : 1,
+					'sizeX':null,
+					'sizeY':null,
 					'dashboard_id' : idDashboard
 				}
 			}
