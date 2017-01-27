@@ -39,6 +39,18 @@ $gridster-item-padding: 14px;
 .dashboard-container {
   padding: 1rem 2rem;
   color: white;
+
+  .btn-byebyeFullScreen {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &.is-fullscreen {
+    .btn-byebyeFullScreen {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
 }
 
 .dash-color-default {

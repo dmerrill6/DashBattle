@@ -1,12 +1,15 @@
 
 =render partial:"menubar/usermenu"
 
-.dashboard-container.clearfix{ 'ng-controller' => "DashboardsController", 'ng-cloak'=>'', "ng-style"=>"{'background-color':bgcolor}" , "ng-init"=>"dashboardId = #{@dashboard.id}",}
+.dashboard-container.clearfix#target{ 'ng-controller' => "DashboardsController", 'ng-cloak'=>'', "ng-style"=>"{'background-color':bgcolor}" , "ng-init"=>"dashboardId = #{@dashboard.id}",}
   %button.btn.fa.fa-paint-brush.text-primary{:colorpicker => "",  "colorpicker-position" => "bottom", "ng-model" => "bgcolor","ng-init" => "bgcolor='#{@dashboard.dashboard_color}'", :type => "text"}
 
 
   %h1.text-center
     =@dashboard.name
+
+  %a.btn.btn-default.btn-byebyeFullScreen.text-right{:href => ""} adios fullscreen
+
   .gridster-container{'gridster'=>'gridsterOpts', 'ng-init'=>"fetchDashboardComponents('#{dashboard_component_dashboards_path(@dashboard, format: :json)}')"}
     %ul
       %li{'gridster-item'=>'dashboardComponent', 'ng-repeat'=>"dashboardComponent in dashboardComponents"}
@@ -48,5 +51,5 @@
             %li{'ng-repeat' => "ranked_school in dashboardComponent.ranking track by $index"}
               {{$index + 1}}) School id {{ranked_school.school_id}}: {{ranked_school.school_messages}} messages
 
-  = link_to "<button>New Component Dashboard</button>".html_safe, new_dashboard_component_dashboard_path(dashboard_id: @dashboard.id)
-  = link_to "<button>List Component Dashboards</button>".html_safe, dashboard_component_dashboards_path(dashboard_id: @dashboard.id)
+  = link_to "<button class='btn btn-default'>New Component Dashboard</button>".html_safe, new_dashboard_component_dashboard_path(dashboard_id: @dashboard.id)
+  = link_to "<button class='btn btn-default'>List Component Dashboards</button>".html_safe, dashboard_component_dashboards_path(dashboard_id: @dashboard.id)

@@ -6,12 +6,14 @@
   box-shadow: none;
 }
 .btn-default {
-  border: 1px solid $br-color;
-  background-color: $c-primary;
+  border: 1px solid white;
+  background-color: transparent;
   color: white;
   font-family: $font-family-bold;
 
   &:hover {
     color: $c-primary;
+    background-color: white;
+    border-color: white;
   }
 }
