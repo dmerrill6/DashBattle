@@ -8,7 +8,7 @@ class ComponentDashboardsController < ApplicationController
     @dashboard = Dashboard.find(params[:dashboard_id])
     @component_dashboards = @dashboard.component_dashboards
     respond_to do |format|
-      format.html{}
+      format.html{render json: @component_dashboards}
       format.json{render json: @component_dashboards}
     end
   end
@@ -16,6 +16,7 @@ class ComponentDashboardsController < ApplicationController
   def new
     @component_dashboard = ComponentDashboard.new
     @dashboard = Dashboard.find(params[:dashboard_id])
+    @components_json = Component.all.to_json
 
   end
 
@@ -26,8 +27,10 @@ class ComponentDashboardsController < ApplicationController
       if @component_dashboard.save
         @dashboard.component_dashboards << @component_dashboard
         format.html{redirect_to action: :index}
+        format.json{render json: @component_dashboard, status: :ok}
       else
         format.html{redirect_to action: :new, notice: "ComponentDashboard could not be created."}
+        format.json{render json: @component_dashboard.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -37,13 +40,12 @@ class ComponentDashboardsController < ApplicationController
   end
 
   def update
+    @component_dashboard = ComponentDashboard.find(params[:id])
     respond_to do |format|
-      if @component_dashboard.update(component_dashboard_params)
-        format.html { redirect_to dashboard_component_dashboards_path, notice: 'ComponentDashboard was successfully updated.' }
-        format.json { render :show, status: :ok, location: @component_dashboard }
+      if @component_dashboard.update(component_dashboard_params.dup)
+        format.json{render json: @component_dashboard, status: :ok}
       else
-        format.html { render :edit }
-        format.json { render json: @component_dashboard.errors, status: :unprocessable_entity }
+        format.json{render json: @component_dashboard.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -61,7 +63,7 @@ class ComponentDashboardsController < ApplicationController
    end
 
   def component_dashboard_params
-		params.require(:component_dashboard).permit(:component_id, :col, :row, :endpoint,
+		params.require(:component_dashboard).permit(:component_id, :col, :row, :sizeX, :sizeY, :endpoint,
     :secret_key, :response_data_location, :refresh_time, :title, :subtitle
 		)
 	end

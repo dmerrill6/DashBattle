@@ -1,4 +1,24 @@
-controllers.controller('DashboardsController', ['$scope', '$http', function($scope, $http){
+controllers.controller('DashboardsController', ['$scope', '$http',function($scope, $http){
+  $scope.dashboardId;
+
+ $scope.$on('colorpicker-closed', function(event, data) {
+      var color = data.value;
+        $http({
+           method: 'patch',
+           url: '/dashboards/' + $scope.dashboardId + ".json",
+           data: {
+             dashboard: {
+               dashboard_color: color
+             }
+           }
+         }).then(function successCallback(data){
+           console.log(data)
+         }, function errorCallback(data){
+           alert("There was an error when saving background");
+         });
+    });
+
+
   $scope.dashboardComponents = [];
   $scope.fetchDashboardComponents = function(dashboardComponentsPath){
     $http({
@@ -49,12 +69,45 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
       method: 'GET',
       url: dashboardComponent.endpoint
     }).then(function successCallback(response) {
-      if(dashboardComponent.component.data_type == 'amount')
+      if(dashboardComponent.component.data_type == 'amount'){
+        dashboardComponent.amountOld = dashboardComponent.amount;
+        if(dashboardComponent.amountOld == null)
+          dashboardComponent.amountOld = 0;
         dashboardComponent.amount = parseDashboardComponentResponseDataLocation(response.data, dashboardComponent.response_data_location);
-      else {
-        // Complete with other types
       }
-
+      else if(dashboardComponent.component.data_type == 'bar-chart'){
+        dashboardComponent.data = parseBarChart(response.data.data[0].top_10);
+        dashboardComponent.chart_options = {
+          tooltips: {
+            custom: function(tooltip){
+              if(!tooltip){
+                return;
+              }
+              else{
+                if(tooltip.dataPoints){
+                  var new_title = dashboardComponent.data.full_names[tooltip.dataPoints[0].index];
+                  if(new_title){
+                    new_title = formatSchoolName(new_title);
+                    tooltip.title = [new_title];
+                    tooltip.titleFontSize = 10;
+                    tooltip.width = new_title.length * 6;
+                    tooltip.caretSize = 0;
+                  }
+                }
+              }
+            }
+          },
+          title: {
+            display: true,
+            text: dashboardComponent.title + " - " + dashboardComponent.subtitle
+          }
+        };
+      }
+      else if(dashboardComponent.component.data_type == 'status-with-success-rate'){
+        dashboardComponent.success_rate = (response.data.result.success_rate*100)+ "%";
+        dashboardComponent.altera_status = response.data.result.altera_status;
+      }
+      // Complete with other types
       dashboardComponent.loaded = true;
 
     }, function errorCallback(response) {
@@ -63,10 +116,28 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
 
   }
 
+  var formatSchoolName = function(name){
+
+    name = name.trim();
+    if(name.includes("-")){
+      name = name.split("-")[1];
+    }
+    name = name.trim();
+    name = name.toLowerCase();
+    names = name.split(' ');
+    complete_name = "";
+    names.forEach((name) => {
+      this.complete_name =  complete_name + " " + name.charAt(0).toUpperCase() + name.slice(1);
+
+    });
+    return complete_name.trim()
+
+  }
+
   var addDashboardComponent = function(dashboardComponent){
-    if(dashboardComponent.component.width != null)
+    if(dashboardComponent.sizeX == null)
       dashboardComponent.sizeX = dashboardComponent.component.width;
-    if(dashboardComponent.component.height != null)
+    if(dashboardComponent.sizeY == null)
       dashboardComponent.sizeY = dashboardComponent.component.height;
     dashboardComponent.loaded = false;
     $scope.dashboardComponents.push(dashboardComponent);
@@ -97,6 +168,61 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     return o;
   }
 
+  var parseBarChart = function(data) {
+    var data_arr = {
+      labels: [],
+      values: [],
+      full_names: []
+    }
+
+    for(var i =0, n=data.length; i < n; ++i)
+    {
+        data_arr.labels.push(data[i][0]);
+        data_arr.full_names.push(data[i][1]);
+        data_arr.values.push(data[i][2]);
+    }
+    return data_arr;
+  }
+
+  $scope.resized = function(event, $element, item) {
+      // sizes[0] = width
+      // sizes[1] = height
+      // gridster.
+      $http({
+         method: 'patch',
+         url: '/dashboards/' + $scope.dashboardId  + "/component_dashboards/" + item.id +  ".json",
+         data: {
+           component_dashboard: {
+             sizeX: item.sizeX,
+             sizeY: item.sizeY
+           }
+         }
+       }).then(function successCallback(data){
+       }, function errorCallback(data){
+         alert("There was an error when saving size");
+       });
+  };
+
+  $scope.moved = function(event, $element, item) {
+      // sizes[0] = width
+      // sizes[1] = height
+      // gridster.
+      $http({
+         method: 'patch',
+         url: '/dashboards/' + $scope.dashboardId  + "/component_dashboards/" + item.id +  ".json",
+         data: {
+           component_dashboard: {
+             col: item.col,
+             row: item.row
+           }
+         }
+       }).then(function successCallback(data){
+       }, function errorCallback(data){
+         alert("There was an error when saving pos");
+       });
+  };
+
+
   $scope.gridsterOpts = {
     columns: 6, // the width of the grid, in columns
     pushing: true, // whether to push other items out of the way on move or resize
@@ -121,10 +247,12 @@ controllers.controller('DashboardsController', ['$scope', '$http', function($sco
     minSizeY: 1, // minumum row height of an item
     maxSizeY: 2, // maximum row height of an item
     resizable: {
-       enabled: true
+       enabled: true,
+       stop: $scope.resized
     },
     draggable: {
-      enabled: true // whether dragging items is supported
+      enabled: true, // whether dragging items is supported
+      stop: $scope.moved
     }
-};
+  };
 }]);

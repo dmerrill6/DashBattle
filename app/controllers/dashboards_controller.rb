@@ -2,6 +2,7 @@ class DashboardsController < ApplicationController
   load_and_authorize_resource
   def show
     @dashboard = Dashboard.find(params[:id])
+
   end
 
   def index
@@ -14,6 +15,17 @@ class DashboardsController < ApplicationController
 
   def new
 
+  end
+
+  def update
+    @dashboard = Dashboard.find(params[:id])
+    respond_to do |format|
+      if @dashboard.update(dashboard_params.dup)
+        format.json{render json: @dashboard, status: :ok}
+      else
+        format.json{render json: @dashboard.errors, status: :unprocessable_entity}
+      end
+    end
   end
 
   def create
@@ -31,7 +43,7 @@ class DashboardsController < ApplicationController
   protected
   def dashboard_params
 		params.require(:dashboard).permit(
-      :name, :user_id
+      :name, :user_id, :dashboard_color
 		)
 	end
 end

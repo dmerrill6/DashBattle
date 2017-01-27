@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104152602) do
+ActiveRecord::Schema.define(version: 20170117180229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20170104152602) do
     t.string   "title"
     t.string   "subtitle"
     t.integer  "refresh_time",           default: 60
+    t.integer  "sizeX"
+    t.integer  "sizeY"
   end
 
   create_table "components", force: :cascade do |t|
@@ -42,8 +44,9 @@ ActiveRecord::Schema.define(version: 20170104152602) do
   create_table "dashboards", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "dashboard_color"
   end
 
   create_table "roles", force: :cascade do |t|
