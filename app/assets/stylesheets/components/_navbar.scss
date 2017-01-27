@@ -20,6 +20,7 @@
 
   .navbar-right {
     margin-right: 0;
+    padding-top: 15px;
   }
 
   a {
@@ -34,7 +35,7 @@
 .menuBar {
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid $br-color;
+  // border-bottom: 1px solid $br-color;
   flex-wrap: wrap;
 
   .menuBar-title {
@@ -48,7 +49,8 @@
   height: 55px;
   padding: 1em;
   align-items: center;
-  background-color: salmon;
+  color: $c-primary;
+  background-color: $c-seconday;
 
   @media screen and (min-width: $screen-sm-min){
     width: 50%;
