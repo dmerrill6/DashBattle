@@ -35,7 +35,7 @@ controllers.controller('newDashboardComponentsController', ['$scope', '$http', f
 					'endpoint' : endpoint+apiKey,
 					'response_data_location' : response_data_location,
 					'refresh_time' : refresh_time,
-					'component_id' : $scope.components[component_type].id,
+					'component_id' : $scope.components[component_type].id, 
 					'col' : 1,
 					'row' : 1,
 					'sizeX':null,
