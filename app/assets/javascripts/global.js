@@ -3,7 +3,7 @@ $(function() {
 
   const fullscrtarget = $('#target')[0]; // Get DOM element from jQuery collection
 
-  $('.js-triggerFullScreen').on('click', () => {
+  $('.js-triggerFullScreen').on('click', function() {
       if (screenfull.enabled) {
           screenfull.request(fullscrtarget);
           $('#target').addClass('is-fullscreen');

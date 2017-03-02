@@ -126,9 +126,8 @@ controllers.controller('DashboardsController', ['$scope', '$http',function($scop
     name = name.toLowerCase();
     names = name.split(' ');
     complete_name = "";
-    names.forEach((name) => {
+    names.forEach(function(name) {
       this.complete_name =  complete_name + " " + name.charAt(0).toUpperCase() + name.slice(1);
-
     });
     return complete_name.trim()
 
