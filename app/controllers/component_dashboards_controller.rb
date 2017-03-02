@@ -8,7 +8,7 @@ class ComponentDashboardsController < ApplicationController
     @dashboard = Dashboard.find(params[:dashboard_id])
     @component_dashboards = @dashboard.component_dashboards
     respond_to do |format|
-      format.html{render json: @component_dashboards}
+      format.html{}
       format.json{render json: @component_dashboards}
     end
   end
