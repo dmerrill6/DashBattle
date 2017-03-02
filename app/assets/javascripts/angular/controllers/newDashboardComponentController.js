@@ -6,15 +6,15 @@ controllers.controller('newDashboardComponentsController', ['$scope', '$http', f
 	$scope.createPapinotasDashboard = function(path, idDashboard, apiKey, title, subtitle){
 		var refresh_time = 10;
 		if($scope.currentSelectedDashboardComponent == 'users'){
-			var endpoint = 'http://papinotas-goten.us-west-2.elasticbeanstalk.com/papinotas/api/v2.0/get_quantity_users?token=';
+			var endpoint = 'http://api.papinotas.com/papinotas/api/v2.0/get_quantity_users?token=';
 			var response_data_location = 'data[0].cantidad';
 			var component_type = 'amount';
 		}else if($scope.currentSelectedDashboardComponent == 'messages'){
-			var endpoint = 'http://papinotas-goten.us-west-2.elasticbeanstalk.com/papinotas/api/v2.0/get_quantity_sms_message?token=';
+			var endpoint = 'http://api.papinotas.com/papinotas/api/v2.0/get_quantity_sms_message?token=';
 			var response_data_location = 'data[0].cantidad';
 			var component_type = 'amount';
 		}else if($scope.currentSelectedDashboardComponent == 'ranking'){
-			var endpoint = 'http://papinotas-goten.us-west-2.elasticbeanstalk.com/papinotas/api/v2.0/sms_top_10_institution?token=';
+			var endpoint = 'http://api.papinotas.com/papinotas/api/v2.0/sms_top_10_institution?token=';
 			var response_data_location = 'data[0].top_10';
 			var component_type = 'bar-chart';
 			refresh_time = 100;
